@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Jquery Library: -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <!-- Google Map API: -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg92lnF1sVdbqNS4ERbLtVpFwfyxm4vfs&callback=initMap&libraries=&v=weekly"
+        defer></script>
+    <!-- Google Fonts: -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Local Files: -->
+    <script src="{% static 'includes/js/scripts.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'includes/css/style.css'%}">
+    <title>Nativ+ Trip Info</title>
+</head>
+
+<body class="TripInfo">
+    <header>
+        <button class="hamburger"></button>
+        <a href="{% url 'home' %}" id="logo"></a>
+        <section class="user">
+            <h4> Good Morning <br> {{ user }} </h4>
+            <section>
+                <a href="#"> </a>
+            </section>
+        </section>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'driverlist' %}"><img src="{% static 'includes/images/Planned.png'%}" alt="Planned">Planned</a></li>
+            <li><a href="{% url 'driverlist' %}"><img src="{% static 'includes/images/History.png'%}" alt="History">History</a></li>
+            <li><a href="#"><img src="{% static 'includes/images/Favorites.png'%}" alt="Favorites">Favorites</a></li>
+            <li><a href="#"><img src="{% static 'includes/images/Settings.png'%}" alt="Settings">Settings</a></li>
+            <li><a href="#"><img src="{% static 'includes/images/Feedback.png'%}" alt="Feedback">Feedback</a></li>
+            <li><a href="{% url 'logout' %}"><img src="{% static 'includes/images/Logout.png'%}" alt="Logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <main>
+        <div id="map"></div>
+        <div class="cards">
+            <section class="details">
+                <div class="locations">
+                    {{ trip.CurrentLocation }}
+                    <img src="{% static 'includes/images/Arrow.png'%}" alt="Arrow">
+                    {{ trip.Destination }}
+                </div>
+                <div class="times">
+                    <div class="arrival">
+                        <span>ETA</span> 19:13
+                        <br>
+                        43 min
+                        <br>
+                        50 km
+                    </div>
+                    <div class="dates">
+                        <img src="{% static 'includes/images/Date.png'%}" alt="Date">
+                        <p>{{ trip.date }}</p>
+                        <img src="{% static 'includes/images/Time.png'%}" alt="Time">
+                        <p>{{ trip.time }}</p>
+                    </div>
+                </div>
+            </section>
+            <section class="passengers">
+                <img src="{% static 'includes/images/Passenger.png'%}" alt="Passenger">
+                <article class="names">
+                    <p>Ortal Shemesh</p>
+                    <div></div>
+                    <p>Efrat Haim</p>
+                </article>
+            </section>
+            <section class="overview">
+                <p>Map Overview</p>
+            </section>
+            <article class="buttons">
+                <div class="EandD">
+                    <a href="{% url 'updatetrip' pk=trip.pk %}" class="edit">Edit</a>
+                    <a href="{% url 'deletetrip' pk=trip.pk %}" class="delete">Delete</a>
+                </div>
+                <a href="#" class="letsGo">Let's Go</a>
+            </article>
+        </div>
+    </main>
+</body>
+
+</html>

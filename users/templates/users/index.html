@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Jquery Library: -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <!-- Google Map API: -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg92lnF1sVdbqNS4ERbLtVpFwfyxm4vfs&callback=initMap&libraries=&v=weekly"
+        defer></script>
+    <!-- Google Fonts: -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Local Files: -->
+    <script src="{% static 'includes/js/scripts.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'includes/css/style.css' %}">
+    <title>Nativ+ Login</title>
+</head>
+
+<body>
+    <header>
+        <a href="{% url 'home' %}" id="logo"></a>
+    </header>
+    <main>
+        <div id="map"></div>
+        <section class="box_gray loginBox">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="login_email">
+                    {{form.username}}
+                </div>
+                <div class="login_password">
+                    {{form.password}}
+                    <h6>{{LOGIN_ERROR}}</h6>
+                </div>
+                <input type="submit" value="Login">
+            </form>
+            <a href="{% url 'register' %}">CREATE ACCOUNT</a>
+        </section>
+    </main>
+</body>
+
+</html>
